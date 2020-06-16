@@ -6,6 +6,7 @@
     "packages/vuepress",
     "packages/docs"
   ],
+  "version": "1.5.2",
   "scripts": {
     "boot": "node scripts/bootstrap.js",
     "build": "yarn tsc && yarn build:docs",
