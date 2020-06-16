@@ -130,3 +130,17 @@ See: [Default Theme Config > Prev / Next Links](../theme/default-theme-config.md
 - Default: `undefined`
 
 See: [Default Theme Config > Prev / Next Links](../theme/default-theme-config.md#prev-next-links).
+
+### search
+
+- Type: `boolean`
+- Default: `undefined`
+
+See: [Default Theme Config > Built-in Search](../theme/default-theme-config.html#built-in-search).
+
+### tags
+
+- Type: `array`
+- Default: `undefined`
+
+See: [Default Theme Config > Built-in Search](../theme/default-theme-config.html#built-in-search).

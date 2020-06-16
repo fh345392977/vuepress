@@ -121,6 +121,9 @@ Rendering of TOC can be configured using the [`markdown.toc`](../config/README.m
 
 ## Custom Containers <Badge text="default theme"/>
 
+Custom containers can be defined by their types, titles, and contents.
+
+### Default Title
 **Input**
 
 ```md
@@ -159,7 +162,8 @@ This is a dangerous warning
 This is a details block, which does not work in IE / Edge
 :::
 
-You can also customize the title of the block:
+### Custom Title
+**Input**
 
 ````md
 ::: danger STOP
@@ -172,6 +176,8 @@ console.log('Hello, VuePress!')
 ```
 :::
 ````
+
+**Output**
 
 ::: danger STOP
 Danger zone, do not proceed
@@ -345,6 +351,29 @@ It also supports [line highlighting](#line-highlighting-in-code-blocks):
 Since the import of the code snippets will be executed before webpack compilation, you can’t use the path alias in webpack. The default value of `@` is `process.cwd()`.
 :::
 
+You can also use a [VS Code region](https://code.visualstudio.com/docs/editor/codebasics#_folding) in order to only include the corresponding part of the code file. You can provide a custom region name after a `#` following the filepath (`snippet` by default).
+
+**Input**
+
+``` md
+<<< @/../@vuepress/markdown/__tests__/fragments/snippet-with-region.js#snippet{1}
+```
+
+**Code file**
+
+<!--lint disable strong-marker-->
+
+<<< @/../@vuepress/markdown/__tests__/fragments/snippet-with-region.js
+
+<!--lint enable strong-marker-->
+
+**Output**
+
+<!--lint disable strong-marker-->
+
+<<< @/../@vuepress/markdown/__tests__/fragments/snippet-with-region.js#snippet{1}
+
+<!--lint enable strong-marker-->
 
 ## Advanced Configuration
 
