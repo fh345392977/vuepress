@@ -1,16 +1,21 @@
-'use strict'
+`use strict`
 
 const EventEmitter = require('events').EventEmitter
 const webpack = require('webpack')
 const readline = require('readline')
-const escape = require('escape-html')
+const { Worker } = require('worker_threads')
 
-const { chalk, fs, path, logger, env, performance } = require('@vuepress/shared-utils')
+const {
+  chalk,
+  fs,
+  path,
+  logger,
+  env,
+  performance
+} = require('@vuepress/shared-utils')
 const createClientConfig = require('../webpack/createClientConfig')
 const createServerConfig = require('../webpack/createServerConfig')
-const { createBundleRenderer } = require('vue-server-renderer')
-const { normalizeHeadTag, applyUserWebpackConfig } = require('../util/index')
-const { version } = require('../../../package')
+const { applyUserWebpackConfig } = require('../util/index')
 
 /**
  * Expose Build Process Class.
@@ -33,7 +38,9 @@ module.exports = class Build extends EventEmitter {
 
   async process () {
     if (this.context.cwd === this.outDir) {
-      throw new Error('Unexpected option: "outDir" cannot be set to the current working directory')
+      throw new Error(
+        'Unexpected option: "outDir" cannot be set to the current working directory'
+      )
     }
 
     this.context.resolveCacheLoaderOptions()
@@ -51,61 +58,120 @@ module.exports = class Build extends EventEmitter {
 
   async render () {
     // compile!
+    performance.start()
     const stats = await compile([this.clientConfig, this.serverConfig])
-    const serverBundle = require(path.resolve(this.outDir, 'manifest/server.json'))
-    const clientManifest = require(path.resolve(this.outDir, 'manifest/client.json'))
+    const serverBundle = require(path.resolve(
+      this.outDir,
+      'manifest/server.json'
+    ))
+    const clientManifest = require(path.resolve(
+      this.outDir,
+      'manifest/client.json'
+    ))
 
     // remove manifests after loading them.
     await fs.remove(path.resolve(this.outDir, 'manifest'))
 
     // ref: https://github.com/vuejs/vuepress/issues/1367
-    if (!this.clientConfig.devtool && (!this.clientConfig.plugins
-      || !this.clientConfig.plugins.some(p =>
-        p instanceof webpack.SourceMapDevToolPlugin
-        || p instanceof webpack.EvalSourceMapDevToolPlugin
-      ))) {
+    if (
+      !this.clientConfig.devtool
+      && (!this.clientConfig.plugins
+        || !this.clientConfig.plugins.some(
+          p =>
+            p instanceof webpack.SourceMapDevToolPlugin
+            || p instanceof webpack.EvalSourceMapDevToolPlugin
+        ))
+    ) {
       await workaroundEmptyStyleChunk(stats, this.outDir)
     }
 
-    // create server renderer using built manifests
-    this.renderer = createBundleRenderer(serverBundle, {
-      clientManifest,
-      runInNewContext: false,
-      inject: false,
-      shouldPrefetch: this.context.siteConfig.shouldPrefetch || (() => true),
-      template: await fs.readFile(this.context.ssrTemplate, 'utf-8')
-    })
-
-    // pre-render head tags from user config
-    // filter out meta tags for they will be injected in updateMeta.js
-    this.userHeadTags = (this.context.siteConfig.head || [])
-      .filter(([headTagType]) => headTagType !== 'meta')
-      .map(renderHeadTag)
-      .join('\n    ')
-
     // if the user does not have a custom 404.md, generate the theme's default
     if (!this.context.pages.some(p => p.path === '/404.html')) {
-      await this.context.addPage({ path: '/404.html' })
+      this.context.addPage({ path: '/404.html' })
     }
 
     // render pages
     logger.wait('Rendering static HTML...')
 
-    const pagePaths = await Promise.all(
-      this.context.pages.map(page => this.renderPage(page))
-    )
+    let activeWorkers = 0
+    const pagePaths = []
+    const pagesPerThread = this.context.pages.length / env.workerThreads
 
-    readline.clearLine(process.stdout, 0)
-    readline.cursorTo(process.stdout, 0)
+    for (let workerNumber = 0; workerNumber < env.workerThreads; workerNumber++) {
+      const startIndex = workerNumber * pagesPerThread
+      const pageData = this.context.pages.slice(
+        startIndex,
+        startIndex + pagesPerThread
+      )
+      const pages = pageData.map(p => ({
+        path: p.path,
+        frontmatter: JSON.stringify(p.frontmatter)
+      }))
+
+      const payload = {
+        clientManifest: JSON.stringify(clientManifest),
+        outDir: this.outDir,
+        pages: Buffer.from(JSON.stringify(pages)),
+        serverBundle: JSON.stringify(serverBundle),
+        siteConfig: JSON.stringify(this.context.siteConfig),
+        ssrTemplate: JSON.stringify(this.context.ssrTemplate),
+        workerNumber,
+        logLevel: logger.options.logLevel
+      }
+
+      const worker = new Worker(path.join(__dirname, './worker.js'))
+      worker.postMessage(payload)
+      activeWorkers++
+      worker.on('message', response => {
+        if (response.complete) {
+          pagePaths.concat(response.filePaths)
+        }
+        if (response.message) {
+          logger.wait(response.message)
+        }
+      })
+      worker.on('error', error => {
+        // readline.cursorTo(process.stdout, 0, i)
+        // readline.clearLine(process.stdout, 0)
+        console.error(
+          logger.error(
+            chalk.red(`Worker #${workerNumber} sent error: ${error}\n\n${error.stack}`),
+            false
+          )
+        )
+      })
+      worker.on('exit', code => {
+        activeWorkers--
+        // readline.cursorTo(process.stdout, 0, i)
+        // readline.clearLine(process.stdout, 0)
+        if (code === 0) {
+          logger.success(`Worker ${workerNumber} completed successfully.`)
+        } else {
+          logger.error(
+            chalk.red(`Worker #${workerNumber} sent exit code: ${code}`),
+            false
+          )
+        }
+        if (activeWorkers === 0) {
+          // DONE.
+          readline.clearLine(process.stdout, 0)
+          readline.cursorTo(process.stdout, 0)
+          const relativeDir = path.relative(this.context.cwd, this.outDir)
+          logger.success(
+            `Generated static files in ${chalk.cyan(relativeDir)}.`
+          )
+          const { duration } = performance.stop()
+          logger.success(
+            `It took a total of ${chalk.cyan(
+              `${duration}ms`
+            )} to run the ${chalk.cyan('vuepress build')}.`
+          )
+          console.log()
+        }
+      })
+    }
 
     await this.context.pluginAPI.applyAsyncOption('generated', pagePaths)
-
-    // DONE.
-    const relativeDir = path.relative(this.context.cwd, this.outDir)
-    logger.success(`Generated static files in ${chalk.cyan(relativeDir)}.`)
-    const { duration } = performance.stop()
-    logger.developer(`It took a total of ${chalk.cyan(`${duration}ms`)} to run the ${chalk.cyan('vuepress build')}.`)
-    console.log()
   }
 
   /**
@@ -120,43 +186,17 @@ module.exports = class Build extends EventEmitter {
 
     const userConfig = this.context.siteConfig.configureWebpack
     if (userConfig) {
-      this.clientConfig = applyUserWebpackConfig(userConfig, this.clientConfig, false)
-      this.serverConfig = applyUserWebpackConfig(userConfig, this.serverConfig, true)
+      this.clientConfig = applyUserWebpackConfig(
+        userConfig,
+        this.clientConfig,
+        false
+      )
+      this.serverConfig = applyUserWebpackConfig(
+        userConfig,
+        this.serverConfig,
+        true
+      )
     }
-  }
-
-  /**
-   * Render page
-   *
-   * @param {Page} page
-   * @returns {Promise<string>}
-   * @api private
-   */
-
-  async renderPage (page) {
-    const pagePath = decodeURIComponent(page.path)
-
-    const context = {
-      url: page.path,
-      userHeadTags: this.userHeadTags,
-      title: 'VuePress',
-      lang: 'en',
-      description: '',
-      version
-    }
-
-    let html
-    try {
-      html = await this.renderer.renderToString(context)
-    } catch (e) {
-      console.error(logger.error(chalk.red(`Error rendering ${pagePath}:`), false))
-      throw e
-    }
-    const filename = pagePath.replace(/\/$/, '/index.html').replace(/^\//, '')
-    const filePath = path.resolve(this.outDir, filename)
-    await fs.ensureDir(path.dirname(filePath))
-    await fs.writeFile(filePath, html)
-    return filePath
   }
 }
 
@@ -188,34 +228,6 @@ function compile (config) {
       resolve(stats.toJson({ modules: false }))
     })
   })
-}
-
-/**
- * Render head tag
- *
- * @param {Object} tag
- * @returns {string}
- */
-
-function renderHeadTag (tag) {
-  const { tagName, attributes, innerHTML, closeTag } = normalizeHeadTag(tag)
-  return `<${tagName}${renderAttrs(attributes)}>${innerHTML}${closeTag ? `</${tagName}>` : ``}`
-}
-
-/**
- * Render html attributes
- *
- * @param {Object} attrs
- * @returns {string}
- */
-
-function renderAttrs (attrs = {}) {
-  const keys = Object.keys(attrs)
-  if (keys.length) {
-    return ' ' + keys.map(name => `${name}="${escape(attrs[name])}"`).join(' ')
-  } else {
-    return ''
-  }
 }
 
 /**

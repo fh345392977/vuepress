@@ -1,4 +1,6 @@
 {
+  "name": "pis-vuepress",
+  "version": "1.5.3",
   "private": true,
   "description": "Minimalistic doc generator with Vue component based layout system",
   "workspaces": [
@@ -6,8 +8,6 @@
     "packages/vuepress",
     "packages/docs"
   ],
-  "version": "1.5.2",
-  "name": "vuepress",
   "scripts": {
     "boot": "node scripts/bootstrap.js",
     "build": "yarn tsc && yarn build:docs",
@@ -21,7 +21,7 @@
     "packages:diff": "lerna diff",
     "packages:list": "lerna ls -l",
     "register-vuepress": "lerna exec --scope vuepress -- yarn link",
-    "release": "yarn lint && yarn build && yarn test && node scripts/release.js",
+    "release": "yarn build && node scripts/release.js",
     "remote-version": "node scripts/remote-version.js",
     "show-help": "yarn workspace docs show-help",
     "test": "node scripts/test.js",
