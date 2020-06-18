@@ -191,7 +191,7 @@ module.exports = function createBaseConfig (context, isServer) {
       .use('file-loader')
         .loader('file-loader')
         .options({
-          name: `assets/img/[name].[hash:8].[ext]`
+          name: `assets/img/[name].[ext]`
         })
 
   config.module
@@ -201,7 +201,7 @@ module.exports = function createBaseConfig (context, isServer) {
         .loader('url-loader')
         .options({
           limit: inlineLimit,
-          name: `assets/media/[name].[hash:8].[ext]`
+          name: `assets/media/[name].[ext]`
         })
 
   config.module
@@ -211,7 +211,7 @@ module.exports = function createBaseConfig (context, isServer) {
         .loader('url-loader')
         .options({
           limit: inlineLimit,
-          name: `assets/fonts/[name].[hash:8].[ext]`
+          name: `assets/fonts/[name].[ext]`
         })
 
   function createCSSRule (lang, test, loader, options) {
