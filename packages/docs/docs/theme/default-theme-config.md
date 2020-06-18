@@ -211,7 +211,7 @@ module.exports = {
     sidebar: [
       {
         title: 'Group 1',   // required
-        path: '/foo/',      // optional, which should be a absolute path.
+        path: '/foo/',      // optional, link of the title, which should be an absolute path and must exist
         collapsable: false, // optional, defaults to true
         sidebarDepth: 1,    // optional, defaults to 1
         children: [
@@ -232,7 +232,7 @@ Sidebar groups are collapsable by default. You can force a group to be always op
 A sidebar group config also supports [sidebarDepth](#nested-header-links) field to override the default sidebar depth (`1`).
 
 ::: tip
-   Nested sidebar group <Badge text="beta"/> is also supported, but the nesting depth should be less than 3, otherwise the console will receive a warning.
+   Nested sidebar group is also supported.
 :::
 
 ### Multiple Sidebars
@@ -272,6 +272,8 @@ module.exports = {
         'three', /* /bar/three.html */
         'four'   /* /bar/four.html */
       ],
+
+      '/baz/': 'auto', /* automatically generate single-page sidebars */
 
       // fallback
       '/': [
@@ -349,7 +351,19 @@ module.exports = {
 }
 ```
 
-You can also disable the built-in search box for individual pages with `YAML front matter`:
+You can improve the search result by [setting `tags` in frontmatter](../guide/frontmatter.md#tags):
+
+```yaml
+---
+tags: 
+  - configuration
+  - theme
+  - indexing
+---
+```
+
+You can also disable the built-in search box for individual pages by [setting `search` in frontmatter](../guide/frontmatter.md#search):
+
 ```yaml
 ---
 search: false
@@ -357,10 +371,11 @@ search: false
 ```
 
 ::: tip
-Built-in Search only builds index from the title, `h2` and `h3` headers, if you need full text search, you can use [Algolia DocSearch](#algolia-docsearch).
+Built-in Search only builds index from the title, `h2` and `h3` headers and `tags`.
+If you need full text search, you can use [Algolia Search](#algolia-search).
 :::
 
-### Algolia DocSearch
+### Algolia Search
 
 The `themeConfig.algolia` option allows you to use [Algolia DocSearch](https://community.algolia.com/docsearch/) to replace the simple built-in search. To enable it, you need to provide at least `apiKey` and `indexName`:
 

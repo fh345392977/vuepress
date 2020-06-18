@@ -179,6 +179,10 @@ VuePress 提供了一种添加额外样式的简便方法。你可以创建一�
 }
 ```
 
+**参考:**
+
+- [为什么不能把 `palette.styl` 和 `index.styl` 合并到一个 API?](../faq/#为什么不能把-palette-styl-和-index-styl-合并到一个-api)
+
 ## 主题
 
 ### theme
@@ -343,14 +347,14 @@ module.exports = {
 - 类型: `Object`
 - 默认值: `{}`
 
-加载 `*.scss` 文件的 [sass-loader](https://github.com/postcss/postcss-loader) 的选项。
+加载 `*.scss` 文件的 [sass-loader](https://github.com/webpack-contrib/sass-loader) 的选项。
 
 ### sass
 
 - 类型: `Object`
 - 默认值: `{ indentedSyntax: true }`
 
-加载 `*.sass` 文件的 [sass-loader](https://github.com/postcss/postcss-loader) 的选项。
+加载 `*.sass` 文件的 [sass-loader](https://github.com/webpack-contrib/sass-loader) 的选项。
 
 ### less
 
