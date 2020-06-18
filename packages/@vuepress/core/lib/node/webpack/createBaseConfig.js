@@ -180,7 +180,7 @@ module.exports = function createBaseConfig (context, isServer) {
         .loader('url-loader')
         .options({
           limit: inlineLimit,
-          name: `assets/img/[name].[hash:8].[ext]`
+          name: `assets/img/[name].[ext]`
         })
 
   // do not base64-inline SVGs.
