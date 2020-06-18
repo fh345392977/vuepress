@@ -1,3 +1,100 @@
+
+* **$core:** check if meta is from head before removing it ([#2403](https://github.com/fh345392977/vuepress/issues/2403)) ([3c94f71](https://github.com/fh345392977/vuepress/commit/3c94f71))
+* **$theme-default:** handle algolia search result with Chinese hash (close: [#2431](https://github.com/fh345392977/vuepress/issues/2431)) ([#2432](https://github.com/fh345392977/vuepress/issues/2432)) ([6183840](https://github.com/fh345392977/vuepress/commit/6183840))
+* correct homepage URLs in package.json ([#2394](https://github.com/fh345392977/vuepress/issues/2394)) ([0854987](https://github.com/fh345392977/vuepress/commit/0854987))
+* **$cli:** inferUserDocsDirectory ignore all node_modules ([#2137](https://github.com/fh345392977/vuepress/issues/2137)) ([df59909](https://github.com/fh345392977/vuepress/commit/df59909))
+* **$core:** include polyfills correctly (close [#1168](https://github.com/fh345392977/vuepress/issues/1168)) ([#2317](https://github.com/fh345392977/vuepress/issues/2317)) ([69c193a](https://github.com/fh345392977/vuepress/commit/69c193a))
+* **$core:** missing 404 page (close [#2248](https://github.com/fh345392977/vuepress/issues/2248)) ([#2250](https://github.com/fh345392977/vuepress/issues/2250)) ([28a4eab](https://github.com/fh345392977/vuepress/commit/28a4eab))
+* **$core:** no dynamic import style ([#1490](https://github.com/fh345392977/vuepress/issues/1490)) ([c80c36b](https://github.com/fh345392977/vuepress/commit/c80c36b))
+* **$core:** resolve jsx files by default (close [#2058](https://github.com/fh345392977/vuepress/issues/2058)) ([#2059](https://github.com/fh345392977/vuepress/issues/2059)) ([f083d8d](https://github.com/fh345392977/vuepress/commit/f083d8d))
+* **$core:** set NODE_ENV before creating app ([#1972](https://github.com/fh345392977/vuepress/issues/1972)) ([245be8d](https://github.com/fh345392977/vuepress/commit/245be8d))
+* **$core:** temp option in siteConfig has not effect (fix [#2038](https://github.com/fh345392977/vuepress/issues/2038)) ([#2040](https://github.com/fh345392977/vuepress/issues/2040)) ([0bb85a4](https://github.com/fh345392977/vuepress/commit/0bb85a4))
+* **$core:** transpile vuepress packages and md files (close [#1606](https://github.com/fh345392977/vuepress/issues/1606), [#1990](https://github.com/fh345392977/vuepress/issues/1990)) ([#2064](https://github.com/fh345392977/vuepress/issues/2064)) ([0ca620f](https://github.com/fh345392977/vuepress/commit/0ca620f))
+* **$default-theme:** deep sidebar links rendenring ([#1973](https://github.com/fh345392977/vuepress/issues/1973)) ([0e5519a](https://github.com/fh345392977/vuepress/commit/0e5519a))
+* **$docs:** Fixed typo ([#1997](https://github.com/fh345392977/vuepress/issues/1997)) ([7d6e420](https://github.com/fh345392977/vuepress/commit/7d6e420))
+* **$docs:** Uniforming VuePress labels in documentation (fix [#1998](https://github.com/fh345392977/vuepress/issues/1998)) ([6a84126](https://github.com/fh345392977/vuepress/commit/6a84126))
+* **$markdown:** Fix four spaces codeblocks rendering (Closes [#1921](https://github.com/fh345392977/vuepress/issues/1921)) ([#1958](https://github.com/fh345392977/vuepress/issues/1958)) ([7bc5825](https://github.com/fh345392977/vuepress/commit/7bc5825))
+* **$plugin-google-analytics:** duplicate tracking of first page (fix [#2017](https://github.com/fh345392977/vuepress/issues/2017)) ([#2039](https://github.com/fh345392977/vuepress/issues/2039)) ([a69df21](https://github.com/fh345392977/vuepress/commit/a69df21))
+* **$plugin-pwa:** no global-ui-component when updatePopup is disabled ([#2041](https://github.com/fh345392977/vuepress/issues/2041)) ([6f9e478](https://github.com/fh345392977/vuepress/commit/6f9e478))
+* **$plugin-pwa:** popup component does not work (close [#2172](https://github.com/fh345392977/vuepress/issues/2172)) ([#2187](https://github.com/fh345392977/vuepress/issues/2187)) ([560b3c6](https://github.com/fh345392977/vuepress/commit/560b3c6))
+* **$plugin-pwa:** work with register-service-worker 1.7.0 (close [#2222](https://github.com/fh345392977/vuepress/issues/2222)) ([#2229](https://github.com/fh345392977/vuepress/issues/2229)) ([604052b](https://github.com/fh345392977/vuepress/commit/604052b))
+* **$plugin-search:** match non-ASCII chars (close [#2242](https://github.com/fh345392977/vuepress/issues/2242)) ([#2283](https://github.com/fh345392977/vuepress/issues/2283)) ([9f3f49c](https://github.com/fh345392977/vuepress/commit/9f3f49c))
+* **$shared-utils:** Add curly quotes to rSpecial ([#1934](https://github.com/fh345392977/vuepress/issues/1934)) ([28a0ed9](https://github.com/fh345392977/vuepress/commit/28a0ed9))
+* **$shared-utils:** fail to resolve markdown-it plugins (close [#2286](https://github.com/fh345392977/vuepress/issues/2286))([#2289](https://github.com/fh345392977/vuepress/issues/2289)) ([16df156](https://github.com/fh345392977/vuepress/commit/16df156))
+* **$shared-utils:** use title variable for homepage (fix [#2247](https://github.com/fh345392977/vuepress/issues/2247)) ([#2307](https://github.com/fh345392977/vuepress/issues/2307)) ([869eb8d](https://github.com/fh345392977/vuepress/commit/869eb8d))
+* **$theme-default:** close dropdown on mouseout (fix [#2227](https://github.com/fh345392977/vuepress/issues/2227)) ([#2303](https://github.com/fh345392977/vuepress/issues/2303)) ([430b917](https://github.com/fh345392977/vuepress/commit/430b917))
+* duplicate meta tags ([#2164](https://github.com/fh345392977/vuepress/issues/2164)) ([01cd096](https://github.com/fh345392977/vuepress/commit/01cd096))
+* **$theme-default:** close dropdown-links when focusout on the last item (close [#1948](https://github.com/fh345392977/vuepress/issues/1948)) ([#1952](https://github.com/fh345392977/vuepress/issues/1952)) ([cd72acc](https://github.com/fh345392977/vuepress/commit/cd72acc))
+* **$theme-default:** non-ASCII hash causes wrong sidebar highlight (close [#2078](https://github.com/fh345392977/vuepress/issues/2078))([#2166](https://github.com/fh345392977/vuepress/issues/2166)) ([ca3679c](https://github.com/fh345392977/vuepress/commit/ca3679c))
+* **$theme-default:** remove error logs for nested sidebar groups ([#2191](https://github.com/fh345392977/vuepress/issues/2191)) ([c3a943c](https://github.com/fh345392977/vuepress/commit/c3a943c))
+* fail to test specific package ([#2099](https://github.com/fh345392977/vuepress/issues/2099)) ([0aadf05](https://github.com/fh345392977/vuepress/commit/0aadf05))
+* opencollective postinstall failure not being ignored on Windows([#2177](https://github.com/fh345392977/vuepress/issues/2177)) ([a9759c0](https://github.com/fh345392977/vuepress/commit/a9759c0))
+* **$shared-utils:** Slugify em/en dash in urls ([#2174](https://github.com/fh345392977/vuepress/issues/2174)) ([8d9968d](https://github.com/fh345392977/vuepress/commit/8d9968d))
+* update known command list ([#2146](https://github.com/fh345392977/vuepress/issues/2146)) ([2b25740](https://github.com/fh345392977/vuepress/commit/2b25740))
+* **$theme-default:** slots don't allow customization for Sidebar & Page (close: [#1950](https://github.com/fh345392977/vuepress/issues/1950)) ([#1951](https://github.com/fh345392977/vuepress/issues/1951)) ([890e85d](https://github.com/fh345392977/vuepress/commit/890e85d))
+* **$theme-default:** use alias for nested SidebarLinks (close [#2049](https://github.com/fh345392977/vuepress/issues/2049)) ([ceccca3](https://github.com/fh345392977/vuepress/commit/ceccca3))
+* **$theme-default:** wrong algolia search route with base config ([#2007](https://github.com/fh345392977/vuepress/issues/2007)) ([b00b277](https://github.com/fh345392977/vuepress/commit/b00b277))
+
+
+### Features
+
+* **$cli:** Notify users of a newer release ([#2121](https://github.com/fh345392977/vuepress/issues/2121)) ([7a09a72](https://github.com/fh345392977/vuepress/commit/7a09a72))
+* **$cli:** run debug mode without clearing screen (close [#2100](https://github.com/fh345392977/vuepress/issues/2100)) ([#2116](https://github.com/fh345392977/vuepress/issues/2116)) ([c6a3cb5](https://github.com/fh345392977/vuepress/commit/c6a3cb5))
+* **$config:** Allow overriding badges colors (close [#1940](https://github.com/fh345392977/vuepress/issues/1940)) ([#1941](https://github.com/fh345392977/vuepress/issues/1941)) ([89a4a8d](https://github.com/fh345392977/vuepress/commit/89a4a8d))
+* **$core:** Add generator meta tag to ssr index.html template ([#2133](https://github.com/fh345392977/vuepress/issues/2133)) ([2826cd7](https://github.com/fh345392977/vuepress/commit/2826cd7))
+* **$core:** Improve VuePress build time ([#2163](https://github.com/fh345392977/vuepress/issues/2163)) ([76da780](https://github.com/fh345392977/vuepress/commit/76da780))
+* **$core:** support async enhanceApp (close [#2074](https://github.com/fh345392977/vuepress/issues/2074)) ([#2075](https://github.com/fh345392977/vuepress/issues/2075)) ([2d53fbb](https://github.com/fh345392977/vuepress/commit/2d53fbb))
+* **$markdown:** `extractHeaders` option (close: [#1903](https://github.com/fh345392977/vuepress/issues/1903)) ([#1945](https://github.com/fh345392977/vuepress/issues/1945)) ([d2fef5d](https://github.com/fh345392977/vuepress/commit/d2fef5d))
+* **$markdown:** snippet partial import ([#2225](https://github.com/fh345392977/vuepress/issues/2225)) ([2f1327b](https://github.com/fh345392977/vuepress/commit/2f1327b))
+* **$markdown:** Support for Rust file extension ([73089a0](https://github.com/fh345392977/vuepress/commit/73089a0))
+* **$plugin-last-updated:** add dateOptions to options ([#2192](https://github.com/fh345392977/vuepress/issues/2192)) ([369c315](https://github.com/fh345392977/vuepress/commit/369c315))
+* **$plugin-search:** improve the native search algorithm ([#1557](https://github.com/fh345392977/vuepress/issues/1557)) ([e9fde5c](https://github.com/fh345392977/vuepress/commit/e9fde5c))
+* **$theme-default:** allow 'auto' in defined sidebars (close: [#1252](https://github.com/fh345392977/vuepress/issues/1252)) ([#2380](https://github.com/fh345392977/vuepress/issues/2380)) ([597f83b](https://github.com/fh345392977/vuepress/commit/597f83b))
+* add variable to config HomePage width (close [#2055](https://github.com/fh345392977/vuepress/issues/2055)) ([#2086](https://github.com/fh345392977/vuepress/issues/2086)) ([b72d145](https://github.com/fh345392977/vuepress/commit/b72d145))
+* refactor page rendering to use node worker threads ([05d61c6](https://github.com/fh345392977/vuepress/commit/05d61c6))
+* refactor page rendering to use node worker threads ([788b9dd](https://github.com/fh345392977/vuepress/commit/788b9dd))
+* refactor page rendering to use node worker threads ([fa4c703](https://github.com/fh345392977/vuepress/commit/fa4c703))
+* remove unnecessary check in moduleResolver.ts ([#2068](https://github.com/fh345392977/vuepress/issues/2068)) ([bd71e43](https://github.com/fh345392977/vuepress/commit/bd71e43))
+* **$theme-default:** allow optional subtitle ([#1981](https://github.com/fh345392977/vuepress/issues/1981)) ([a28804c](https://github.com/fh345392977/vuepress/commit/a28804c))
+* **$theme-default:** external links in prev/next (close [#1962](https://github.com/fh345392977/vuepress/issues/1962))([#1984](https://github.com/fh345392977/vuepress/issues/1984)) ([9f28814](https://github.com/fh345392977/vuepress/commit/9f28814))
+* **$theme-default:** markdown details custom block (close [#768](https://github.com/fh345392977/vuepress/issues/768)) ([#2044](https://github.com/fh345392977/vuepress/issues/2044)) ([7f2a997](https://github.com/fh345392977/vuepress/commit/7f2a997))
+* **$theme-default:** Support configuring target and rel for nav links (close [#1353](https://github.com/fh345392977/vuepress/issues/1353)) ([#1734](https://github.com/fh345392977/vuepress/issues/1734)) ([770ba72](https://github.com/fh345392977/vuepress/commit/770ba72))
+
+
+### Reverts
+
+* "fix($theme-default): close dropdown on mouseout (fix [#2227](https://github.com/fh345392977/vuepress/issues/2227))" ([f54b389](https://github.com/fh345392977/vuepress/commit/f54b389))
+
+
+
+# [1.2.0](https://github.com/fh345392977/vuepress/compare/v1.1.0...v1.2.0) (2019-10-11)
+
+
+### Bug Fixes
+
+* **$changelog:** Remove duplicate version in changelog ([#1859](https://github.com/fh345392977/vuepress/issues/1859)) ([7f6391e](https://github.com/fh345392977/vuepress/commit/7f6391e))
+* **$core:** cannot read property 'path' of undefined ([#1906](https://github.com/fh345392977/vuepress/issues/1906)) ([8d07675](https://github.com/fh345392977/vuepress/commit/8d07675))
+* **$core:** optimize error log (close: [#1296](https://github.com/fh345392977/vuepress/issues/1296)) ([#1413](https://github.com/fh345392977/vuepress/issues/1413)) ([51de6cf](https://github.com/fh345392977/vuepress/commit/51de6cf))
+* **$markdown:** Highlight kotlin code on snippets import (close: [#1831](https://github.com/fh345392977/vuepress/issues/1831))([#1874](https://github.com/fh345392977/vuepress/issues/1874)) ([f913fea](https://github.com/fh345392977/vuepress/commit/f913fea))
+* **$markdown:** notify error when not found snippet (close: [#1872](https://github.com/fh345392977/vuepress/issues/1872)) ([#1910](https://github.com/fh345392977/vuepress/issues/1910)) ([6aaa7d7](https://github.com/fh345392977/vuepress/commit/6aaa7d7))
+* **$theme-default:** Fix editLink on specific page ([#1825](https://github.com/fh345392977/vuepress/issues/1825)) ([0e8a442](https://github.com/fh345392977/vuepress/commit/0e8a442))
+* **$theme-default:** make arrow spacing consistent ([#1907](https://github.com/fh345392977/vuepress/issues/1907)) ([dbda574](https://github.com/fh345392977/vuepress/commit/dbda574)), closes [#1427](https://github.com/fh345392977/vuepress/issues/1427)
+* **$theme-default:** make dropdown-title's UI consistent with nav-link ([#1890](https://github.com/fh345392977/vuepress/issues/1890)) ([757e880](https://github.com/fh345392977/vuepress/commit/757e880))
+* **$theme-default:** Make navbar dropdown links accessible ([#1837](https://github.com/fh345392977/vuepress/issues/1837)) ([a8ce645](https://github.com/fh345392977/vuepress/commit/a8ce645))
+* **$theme-default:** regression of custom container default title ([#1875](https://github.com/fh345392977/vuepress/issues/1875)) ([e0ef407](https://github.com/fh345392977/vuepress/commit/e0ef407))
+* **config:** Check title only for PRs ([#1853](https://github.com/fh345392977/vuepress/issues/1853)) ([2fcacb4](https://github.com/fh345392977/vuepress/commit/2fcacb4))
+
+
+### Features
+
+* **$core:** config pattern of resolved files ([#1705](https://github.com/fh345392977/vuepress/issues/1705)) ([1f3e4e2](https://github.com/fh345392977/vuepress/commit/1f3e4e2)), closes [#1700](https://github.com/fh345392977/vuepress/issues/1700)
+* **$core:** support async function exported in vuepress config (close: [#1185](https://github.com/fh345392977/vuepress/issues/1185)) ([#1925](https://github.com/fh345392977/vuepress/issues/1925)) ([cdbfd75](https://github.com/fh345392977/vuepress/commit/cdbfd75))
+* **$core:** Upgrade vue version ([#1876](https://github.com/fh345392977/vuepress/issues/1876)) ([c17c70e](https://github.com/fh345392977/vuepress/commit/c17c70e))
+* **$shared-utils:** resolve regularPath when getting permalink ([#1786](https://github.com/fh345392977/vuepress/issues/1786)) ([c6ce6cf](https://github.com/fh345392977/vuepress/commit/c6ce6cf))
+* **$theme-default:** smooth scroll (close [#567](https://github.com/fh345392977/vuepress/issues/567)) ([#1881](https://github.com/fh345392977/vuepress/issues/1881)) ([2e3efb4](https://github.com/fh345392977/vuepress/commit/2e3efb4))
+
+
+
 ## [1.5.2](https://github.com/vuejs/vuepress/compare/v1.5.1...v1.5.2) (2020-06-14)
 
 
