@@ -1,4 +1,6 @@
 {
+  "name": "vuepress",
+  "version": "1.3.0",
   "private": true,
   "description": "Minimalistic doc generator with Vue component based layout system",
   "workspaces": [
