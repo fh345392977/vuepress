@@ -121,6 +121,7 @@ module.exports = class PluginAPI {
     let plugin = this._pluginResolver.resolve(pluginRaw)
     if (!plugin.entry) {
       if (plugin.error) {
+        console.log(plugin.error);
         logger.debug(plugin.error)
         throw new Error(`An error was encountered in ${type} "${pluginRaw}"`)
       } else {
