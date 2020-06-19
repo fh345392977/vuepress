@@ -33,7 +33,7 @@
           :href="s.path"
           @click.prevent
         >
-          <span class="page-title">{{ s.header.title || s.path }}</span>
+          <span class="page-title">{{ s.header && s.header.title ? s.header.title : s.title }}</span>
           <!-- <span
             v-if="s.header"
             class="header"
