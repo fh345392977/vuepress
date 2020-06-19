@@ -25,7 +25,7 @@ parentPort.once('message', async payload => {
     runInNewContext: false,
     inject: false,
     // 因为postMessage传不了函数，所以只能改成属性，而不是原版的函数
-    shouldPrefetch: () => siteConfig.shouldPrefetch || true,
+    shouldPrefetch: () => siteConfig.shouldPrefetch || false,
     template: await fs.readFile(ssrTemplate, 'utf-8')
   })
 
