@@ -30,12 +30,6 @@
     "update-core-team": "all-contributors generate",
     "view-info": "yarn tsc && yarn workspace docs view-info"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
     "*.{js,ts,vue}": [
       "eslint --fix",
