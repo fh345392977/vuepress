@@ -44,7 +44,8 @@
         :key="index"
         class="feature"
       >
-        <h2>{{ feature.title }}</h2>
+        <h2 v-if="feature.link"><a :href="feature.link">{{ feature.title }}</a></h2>
+        <h2 v-else>{{ feature.title }}</h2>
         <p>{{ feature.details }}</p>
       </div>
     </div>
