@@ -67,6 +67,12 @@ export default {
 
   props: ['sidebarItems'],
 
+  mounted() {
+    document.addEventListener('keydown', this.onKeyDownNav);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.onKeyDownNav);
+  },
   computed: {
     prev () {
       return resolvePageLink(LINK_TYPES.PREV, this)
@@ -74,6 +80,22 @@ export default {
 
     next () {
       return resolvePageLink(LINK_TYPES.NEXT, this)
+    }
+  },
+  methods: {
+    onKeyDownNav(event) {
+      let target;
+      switch(event.keyCode){
+        case 37:
+            if(this.prev) target = this.prev.path;
+            break;
+        case 39:
+            if(this.next) target = this.next.path;
+            break;
+      }
+      if (target) {
+        this.$router.push(target);
+      }
     }
   }
 }
